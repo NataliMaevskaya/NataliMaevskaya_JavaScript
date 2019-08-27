@@ -32,6 +32,12 @@ for (let j = 1; j < (arr[i]).length; j++){
     console.log(arr[i][j] + '\n');
 }
 
+// let array = {
+//     'en' : ['Monday', 'Tuesday', 'Wednesday', 'Thuesday', 'Friday', 'Saturday', 'Sunday'],
+//     'ru' : ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота', 'Воскесенье']
+// };
+// console.log(array[lang]);
+
 let namePerson = prompt('Введите имя: '); 
 let typePerson = (namePerson === 'Артём') ? 'директор' : (namePerson === 'Максим' ? 'преподаватель' : 'студент') ;
 console.log('typePerson: ', typePerson);
