@@ -29,8 +29,8 @@ let appData = {
         if ( confirm('Есть ли у вас дополнительный источник заработка?') ) {
             let itemIncome;
             do {
-                itemIncome = prompt('Какой у вас дополнительный заработок?', 'Декоратор');
-            } while (typeof itemIncome !== 'string' || itemIncome === null || itemIncome === '');
+                itemIncome = +prompt('Какой у вас дополнительный заработок?', 'Декоратор');
+            } while (itemIncome === null || itemIncome === '');
             let cashIncome;
             do {
                 cashIncome = +prompt('Сколько в месяц вы на этом зарабатываете?', 10000);
@@ -49,8 +49,8 @@ let appData = {
             expenseName;
         for (let i = 0; i < 2; i++) {
             do {
-                expenseName = prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Квартплата');
-            } while (typeof expenseName !== 'string' || expenseName === null || expenseName === '');
+                expenseName = +prompt('Какие обязательные ежемесячные расходы у вас есть?', 'Квартплата');
+            } while (expenseName === null || expenseName === '');
             do {
                 expense = +prompt('Во сколько это обойдется?', 3000);
             } while(isNaN(expense) || expense <= 0 || expense === '' || expense === null);
@@ -111,9 +111,6 @@ console.log('Расходы за месяц: ', appData.expensesMonth);
 appData.getBudget();
 // console.log('Накопления за месяц: ', appData.budgetMonth);
 
-// Накопления за период
-// console.log('Накопления за ' + appData.period + ' месяцев: ' + appData.budgetMonth * appData.period);
-
 // Срок достижения цели
 let numMonthMission = appData.getTargetMonth();
 if ( !isFinite(numMonthMission) || numMonthMission < 0 || isNaN(numMonthMission)) { 
@@ -124,6 +121,10 @@ if ( !isFinite(numMonthMission) || numMonthMission < 0 || isNaN(numMonthMission)
 
 // Уровень дохода
 appData.getStatusIncome();
+// Инфо о депозите
+appData.getInfoDeposit();
+// Накопления за период
+console.log('Накопления за ' + appData.period + ' месяцев: ' + appData.calcSavedMoney());
 
 console.log('Наша программа включает в себя данные: ');
 for (let key in appData) {
