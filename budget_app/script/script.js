@@ -8,7 +8,7 @@ let deposit = document.querySelector('#deposit-check');
 
 let inputs = document.querySelectorAll('.additional_income-item');
 
-let clsValue = document.querySelectorAll('.result-total');
+let clsValue = document.querySelectorAll('input[class*="-value"]');
 
 let leftInputs = document.querySelector('.data').querySelectorAll('input[type="text"]');
 let salaryAmount = leftInputs[0];
