@@ -1,19 +1,27 @@
 'user strict';
 
+// let date = new Date(2014, 5, 1, 8, 5, 0);
 let date = new Date();
 
-console.log(date.toLocaleTimeString() + ' ' + formatDate(date));
+let body = document.querySelector('body');
+let addElem = document.createElement('p');
+addElem.textContent = formatDate(date);
+body.appendChild(addElem);
 
 function formatDate(date) {
+    let hours = addZeroBefore(date.getHours());
+    let minutes = addZeroBefore(date.getMinutes());
+    let seconds = addZeroBefore(date.getSeconds());
 
-    let day = date.getDate();
-    if (day < 10) {
-        day = '0' + day;
-    }  
-    let month = date.getMonth() + 1;
-    if (month < 10) {
-        month = '0' + month;
-    }  
-    let year = date.getFullYear(); 
-    return day + '.' + month + '.' + year;
+    let day = addZeroBefore(date.getDate());
+    let month = addZeroBefore(date.getMonth() + 1);
+    let year = addZeroBefore(date.getFullYear()); 
+
+    return hours + ':' + minutes + ':' + seconds + ' ' + day + '.' + month + '.' + year;
+  }
+  function addZeroBefore(num) {
+      if(num < 10) {
+          num = '0' + num;
+      }
+      return num;
   }
