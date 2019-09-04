@@ -25,7 +25,9 @@ let start = document.getElementById('start'),
     additionalExpensesItem = document.querySelector('.additional_expenses-item'),
     targetAmount = document.querySelector('.target-amount'),
     incomeItems = document.querySelectorAll('.income-items'),
-    textInputs = document.querySelectorAll('input[type="text"]');
+    textInputs = document.querySelectorAll('input[type="text"]'),
+    inputsLetters = document.querySelectorAll('input[placeholder="Наименование"]'),
+    inputsNumbers = document.querySelectorAll('input[placeholder="Сумма"]');
 
 let appData = {
     budget: 0,
@@ -74,6 +76,9 @@ let appData = {
     addExpensesBlock: function() {
         
         let cloneExpensesItem = expensesItems[0].cloneNode(true);
+        cloneExpensesItem.querySelectorAll('input').forEach(function(item) {
+            item.value = '';
+        });
         expensesItems[0].parentNode.insertBefore(cloneExpensesItem, expensesPlus);
         expensesItems = document.querySelectorAll('.expenses-items');
 
@@ -84,6 +89,9 @@ let appData = {
     },
     addIncomeBlock: function() {
         let cloneIncomeItem = incomeItems[0].cloneNode(true);
+        cloneIncomeItem.querySelectorAll('input').forEach(function(item) {
+            item.value = '';
+        });
         incomeItems[0].parentNode.insertBefore(cloneIncomeItem, incomePlus);
         incomeItems = document.querySelectorAll('.income-items');
 
@@ -105,6 +113,15 @@ let appData = {
     startOffCancelOn: function() {
         start.style.display = 'none';
         cancel.style.display = 'block';
+    },
+    checkInputsLetters: function() {
+        if (this.value)
+    },
+    checkInputsNumbers: function() {
+        if (isNaN(this.value)) {
+            this.focus();
+            return;
+        } 
     },
     getExpenses: function() {
         expensesItems.forEach(function(item){
@@ -194,6 +211,15 @@ start.addEventListener('click', appData.start);
 expensesPlus.addEventListener('click', appData.addExpensesBlock);
 incomePlus.addEventListener('click', appData.addIncomeBlock);
 periodSelect.addEventListener('change', appData.changePeriod);
+
+inputsLetters.forEach(function(item) {
+    item.addEventListener('blur', appData.checkInputsLetters);
+    // item.addEventListener('input', appData.checkInputsLetters);
+});
+inputsNumbers.forEach(function(item) {
+    item.addEventListener('blur', appData.checkInputsNumbers);
+});
+// inputsNumbers.addEventListener('input', appData.checkInputsNumbers);
 
 // Обязательные расходы
 // console.log('Расходы за месяц: ', appData.expensesMonth);
